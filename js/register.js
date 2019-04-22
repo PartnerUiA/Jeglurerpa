@@ -1,45 +1,113 @@
 jQuery(document).ready(function($){
 
+//register new user logic
+
+
+//Init register button
+  var regbtn = document.getElementById("regbtn");
+//register click logic
+regbtn.onclick = function () {
+  var fn = document.getElementById("signup-fname").value;
+  var ln = document.getElementById("signup-lname").value;
+  var em = document.getElementById("signup-email").value;
+  var pw = document.getElementById("signup-password").value;
+  console.log(em);
+  if (fn.length == 0 || ln.length == 0 || em.length == 0 || pw.length == 0 || !validateEmail(em)) {
+    return;
+  } else {
+    regPass(fn, ln, em, pw);
+  }
+}
+
+//Validation of email.
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+//Register new user using ajax
+
+  function regPass(fn, ln, em, pw) {
+    $.ajax({
+    url: "newuser.php",
+    type: "get",
+    data: { 
+      'fn': fn, 
+      'ln': ln, 
+      'em': em, 
+      'pw': pw
+    },
+    success: function(result) {
+      console.log("Success");
+      
+
+    },
+    error: function(error) {
+             alert('Exception:', error);
+    }
+  });
+  }
+
+var resetBtn = document.getElementById('resetpwBtn');
+
+resetBtn.onclick = function() {
+  var em = document.getElementById('reset-email').value;
+  if (em == "") {
+    return;
+  } else {
+  setCookie('em', em);
+
+  }
+}
+
+
+
+function loginPass(em, pw) {
+    $.ajax({
+    url: "login.php",
+    type: "get",
+    data: { 
+      'em': em, 
+      'pw': pw
+    },
+    success: function(result) {
+      console.log("Success");
+      switch (result) {
+        case '0':
+        console.log("UID Not there");
+        break;
+        case '1':
+        document.getElementById("logpwerr").innerHTML = 'block';
+        alert("Feil passord.");
+        break;
+        case '2':
+        window.location.replace("index.php");
+        break;
+      }
+
+    },
+    error: function(error) {
+             alert('Exception:', error);
+    }
+  });
+  }
+
+
 var loginbtn = document.getElementById('loginbtn');
 
 loginbtn.onclick = function() {
-    var pd = document.getElementById("signin-password").value;
+    document.getElementById("logpwerr").style.display= 'none';
+    document.getElementById("loguiderr").style.display= 'none';
+    var pw = document.getElementById("signin-password").value;
     var em = document.getElementById("signin-email").value;
-    //console.log(pd, em);
-    setCookie('em',em);
-    setCookie('pd', pd);
-    document.getElementById('loginform').submit();
-    //console.log(f.value);
-    //console.log(g.value);
-
-}
-var regbtn = document.getElementById('regbtn');
-
-console.log(regbtn);
-regbtn.onclick = function() {
-
-    var fn = document.getElementById("signup-fname").value;
-    var ln = document.getElementById("signup-lname").value;
-    var pd = document.getElementById("signup-password").value;
-    var em = document.getElementById("signup-email").value;
-    if (fn == ""|| ln== "" || pd== "" || em== "" ) {
-      return
+    if (em.length == 0 || pw.length == 0) {
+      return;
     } else {
-    //console.log(pd, em);
-    setCookie('em', em);
-    setCookie('pd', pd);
-    setCookie('fn', fn);
-    setCookie('ln', ln);
-
-    document.getElementById('regform').submit();
+    loginPass(em, pw);
     }
-    //console.log(f.value);
-    //console.log(g.value);
-
 }
 
-
-
+var regbtn = document.getElementById('regbtn');
 
     var $form_modal = $('.user-modal'),
       $form_login = $form_modal.find('#login'),

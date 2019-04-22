@@ -1,9 +1,8 @@
 <html>
 <body>
 <?php
+session_start();
 if (isset ($_REQUEST['deckname'])) {
-
-echo "FEAF";
 
 }
 for ($i = 0; $i < sizeof($_REQUEST['CID']); $i++) {

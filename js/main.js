@@ -29,6 +29,17 @@ var gameHeight = h;
 
 var game = new Phaser.Game(w, h, Phaser.AUTO, 'game', true);
 
+var landscape = false;
+
+
+if (w > h) {
+	landscape = true;
+	console.log('w m thn h');
+} else {
+	landscape = false;
+}
+
+
 
 /*
 Required global variables
@@ -63,14 +74,14 @@ var fscrnBtn;
 var scaleRate = 1;
 var turn = 0;
 var dice;
-var playerNumber = getCookie("players");
+var playerNumber = window.localStorage.getItem("players");
 var players = [];
 var cardCount = [0, 0, 0, 0];
 var ylKort = [];
 var blKort = [];
 var reKort = [];
 var grKort = [];
-var deck = JSON.parse(window.localStorage.getItem('deck'));;
+var deck = JSON.parse(window.localStorage.getItem('deck'));
 var decktrackTxt;
 var qstAnswrd = 0;
 var emitter1 = null;
@@ -153,7 +164,7 @@ var GameState = {
 	},
 	create: function(){
 		//Asset creation. Assets used upon initial game load
-
+		game.stage.backgroundColor = "#FFF";
 		//Pushing into array of player objects
 		for (var pl = 0; pl < playerNumber ; pl++){
 			players[pl] = new Player(window.localStorage.getItem("player"+(1+pl)+"name"), pl+1);
@@ -213,12 +224,15 @@ var GameState = {
 		plyNameTxt.anchor.x = 0.5;
 		plyNameTxt.anchor.y = 0.5;
 		//Deck name text display
-		var decktxt = game.add.text(0, 0, "Tilfeldig kortstokk #1");
+		var decktxt = game.add.text(0, 0, deck["D_Name"]);
 		decktxt.fontSize = 16;
-		decktrackTxt = game.add.text(0, decktxt.height, (runde - 1) + "av" + deck.length + " kort besvart");
-		decktrackTxt.fontSize = 16;
+		//decktrackTxt = game.add.text(0, decktxt.height, (runde - 1) + "av" + deck.length + " kort besvart");
+		//decktrackTxt.fontSize = 16;
 
-		var infoBox = game.add.sprite(25, 150,'infoBox');
+		var infoBox = game.add.sprite(game.world.centerX - game.world.centerX, game.world.centerY-game.world.centerY+100,'infoBox');
+				if (landscape) {
+			infoBox.scale.setTo(0.75,0.75);
+		}
 		game.add.sprite(game.world.centerX-(game.cache.getImage('redCard').width/2)-40,game.world.centerY-(game.cache.getImage('redCard').height/2)-40, 'redCard');
 		game.add.sprite(game.world.centerX-(game.cache.getImage('bluCard').width/2)-30,game.world.centerY-(game.cache.getImage('bluCard').height/2)-30, 'bluCard');
 		game.add.sprite(game.world.centerX-(game.cache.getImage('yelCard').width/2)-20,game.world.centerY-(game.cache.getImage('yelCard').height/2)-20, 'yelCard');
@@ -230,9 +244,14 @@ var GameState = {
 		console.log(game.world.width);
 		fscrnBtn.anchor.x = 0.5;
 		homeBtn = game.add.button(infoBox.x, 10+infoBox.y+infoBox.height, 'home', goHome, this);
-		homeBtn.scale.setTo(0.9,0.9);
+				if (landscape) {
+			homeBtn.scale.setTo(0.75,0.75);
+		}
+
 		answerSheet = game.add.button(infoBox.x, infoBox.y+infoBox.height+10+homeBtn.height, 'fasit', openFasit, this)
-		answerSheet.scale.setTo(0.9,0.9);
+				if (landscape) {
+			answerSheet.scale.setTo(0.75,0.75);
+		}
 		//All emitter/confetti loads.
 		game.physics.startSystem(Phaser.Physics.ARCARDE);
 		emitter1 = game.add.emitter(0,0,500);
@@ -245,10 +264,12 @@ var GameState = {
 		emitter1.y = game.world.centerY-125;
 		emitter2.x = game.world.centerX+150;
 		emitter2.y = game.world.centerY-125;
+
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
 	},
 	update: function(){
+
 		//Updating cards answered
 		if (!game.input.activePointer.isDown) {
 			
@@ -270,7 +291,7 @@ var GameState = {
 			answerSheet.alpha = 1;	
 		}
 		//console.log(homeBtn.alpha);
-		decktrackTxt.text = (qstAnswrd) + " av " + (deck["Red"].length+deck["Blu"].length+deck["Yel"].length+deck["Gre"].length) + " Kort besvart";
+		//decktrackTxt.text = (qstAnswrd) + " av " + (deck["Red"].length+deck["Blu"].length+deck["Yel"].length+deck["Gre"].length) + " Kort besvart";
 	}
 };
 
@@ -289,7 +310,7 @@ function openFasit() {
 	window.open("fasit.html", "_blank");
 	answerSheet.alpha = 1;
 }
-game.transparent = true;
+
 //Starting game
 game.state.add('GameState', GameState);
 game.state.start('GameState');
@@ -495,14 +516,17 @@ function fullScreener() {
 
 	if (game.scale.isFullScreen) {
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+		game.transparent = true;
 		game.scale.stopFullScreen();
 		}
 		else
 		{
        	game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+       	game.transparent = false;
+       	
 		game.scale.startFullScreen(false);
 		}
-		
+		console.log(game.transparent);
 }
 //Retrieving card text and incrementing card number
 function checkCards(pos){

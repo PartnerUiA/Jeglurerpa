@@ -1,29 +1,18 @@
 <?php
+function tokenG($length = 65) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
-/*
-echo $_COOKIE['fn'];
-echo $_COOKIE['ln'];
-echo $_COOKIE['em'];
-echo $_COOKIE['pd'];
-*/
-
-$fn = $_COOKIE['fn'];
-$ln = $_COOKIE['ln'];
-$em = $_COOKIE['em'];
-$pwd = password_hash($_COOKIE['pd'], PASSWORD_BCRYPT);
-
-unset($_COOKIE['em']);
-unset($_COOKIE['pd']);
-unset($_COOKIE['fn']);
-unset($_COOKIE['ln']);
-/*
-echo '<script>document.cookie = "em= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";</script>';
-echo '<script>document.cookie = "pd= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";</script>';
-echo '<script>document.cookie = "fn= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";</script>';
-echo '<script>document.cookie = "ln= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";</script>';
-*/
-
-
+$fn = $_REQUEST['fn'];
+$ln = $_REQUEST['ln'];
+$em = $_REQUEST['em'];
+$pwd = password_hash($_REQUEST['pw'], PASSWORD_BCRYPT);
 
 try {
 	include_once "../private/connectdb.php";
@@ -43,13 +32,18 @@ if ($sth->rowCount() >= 1) {
 	echo "<script>location.replace('register.html');</script>";
 	} 
 	else {
-		//$regist = $pdo->prepare('INSERT INTO UserAccount (U_Password, U_email, U_Name, U_Surname, U_AccountType) VALUES (:pass,:email,:fname,:lname,"standard")');
-		/*$regist->execute([
+		$regist = $pdo->prepare('INSERT INTO UserAccount (U_Password, U_email, U_Name, U_Surname, U_AccountType) VALUES (:pass,:email,:fname,:lname,"standard")');
+		$regist->execute([
 			':pass' => $pwd,
 			':email' => $em,
 			':fname' => $fn,
 			':lname' => $ln
-		]);*/
+		]);
+		$tokenGen = $pdo->prepare('INSERT INTO password_resets (email, token) VALUES (:email,:token)');
+		$tokenGen->execute([
+			':email' => $em,
+			':token' => tokenG()
+		]);
 		echo '<script>alert("'.$em.' er nå registrert. Du kan logge inn.");</script>';
 		echo "<script>location.replace('index.html');</script>";
 	}

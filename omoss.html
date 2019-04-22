@@ -5,9 +5,6 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 <head>
-<?php session_start(); 
-//echo "<script>window.localStorage.setItem('uid',".$_SESSION['uid'].");</script>";
-?>
 
 	<!-- Basic Page Needs
 	================================================== -->
@@ -72,7 +69,6 @@
 	<script src="js/particles.js"></script>
 	<script src="js/custom.js"></script>
 	<script src="js/webfunction.js"></script>
-	<script src="gamefunction.js"></script>
 
 </head>
 <body>
@@ -149,80 +145,13 @@
 	================================================== -->
 	
 	<div class="section full-height height-auto-lg hide-over background-light-blue">
-					<div id="setup">
-						<h5>Hvilken kortstokk ønsker du å bruke?</h5>
-						<?php 
-							include '../private/getDeck.php';
-							echo "<select id='deckname' title='deckchooser'>";
-							for ($o = 0; $o < sizeof($res); $o++) {
-								echo "<option value=".$res[$o]['DeckID'].">".$res[$o]['D_Name']."</option>";
-							}
-							echo "</select>";
-						?>
-
-						<h5>Hvor mange spillere er det?</h5>
-						 <select id="playernumber" title="Hvor mange spillere er det?.">
-							<option>1</option>
-							<option>2</option>
-							<option selected="selected">3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-						</select>
-						<br><br><br>
-
-						<div id="player1input" class="player-input">
-							<label>Spiller 1:</label><br><input class="plyname" type="text" id="player1name" title="Player name" maxlength="16" value="Spiller 1"/>
-						</div>
-
-						<div id="player2input" class="player-input">
-							<label>Spiller 2:</label><br> <input class="plyname" type="text" id="player2name" title="Player name" maxlength="16" value="Spiller 2" />
-						</div>
-
-						<div id="player3input" class="player-input">
-							<label>Spiller 3:</label><br> <input class="plyname" type="text" id="player3name" title="Player name" maxlength="16" value="Spiller 3" />
-						</div>
-
-						<div id="player4input" class="player-input" style="display: none">
-							<label>Spiller 4:</label><br> <input class="plyname" type="text" id="player4name" title="Player name" maxlength="16" value="Spiller 4" />
-						</div>
-
-						<div id="player5input" class="player-input" style="display: none">
-							<label>Spiller 5:</label><br> <input class="plyname" type="text" id="player5name" title="Player name" maxlength="16" value="Spiller 5" />
-						</div>
-
-						<div id="player6input" class="player-input" style="display: none">
-							<label>Spiller 6:</label><br> <input class="plyname" type="text" id="player6name" title="Player name" maxlength="16" value="Spiller 6" />
-						</div>
-
-						<div id="player7input" class="player-input" style="display: none">
-							<label>Spiller 7:</label><br> <input class="plyname" type="text" id="player7name" title="Player name" maxlength="16" value="Spiller 7" />
-						</div>
-
-						<div id="player8input" class="player-input" style="display: none">
-							<label>Spiller 8:</label><br> <input class="plyname" type="text" id="player8name" title="Player name" maxlength="16" value="Spiller 8" />
-						</div>
-						<div id="player9input" class="player-input" style="display: none">
-							<label>Spiller 9:</label><br> <input class="plyname" type="text" id="player9name" title="Player name" maxlength="16" value="Spiller 9" />
-						</div>
-						<br>
-						<button class="btn btn-primary js-tilt __mPS2id" id="startGame">Start spillet</button>
-						</div>
-						<div id="phptest">
-						<?php 
-							include '/private/dbc.php';
-						?>
-
-						<script>
-						var chosenDeck = <?php echo json_encode($deck); ?>;
-						</script>
-						</div>
-					
-					
-					
+		<div class="hero-center-wrap relative-on-lg">
+			<div class="container">	
+			<h2>Jeg lurer på</h2>
+			
+			<p>Fra 2016 er det Sørlandet sykehus som har overtatt og eier Jeg Lurer På og rettighetene til spillet "Jeg lurer på."</p>
+					</div>
+</div>
 </div>
 
 		

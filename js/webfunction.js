@@ -1,3 +1,8 @@
+$(window).onbeforeunload = function () {
+  localStorage.clear();
+  console.log('ul');
+}
+
 $(document).ready(function(){    
 
 var isMobile = false; //initiate as false
@@ -7,33 +12,52 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
 }
 
+
+
 document.getElementById('playernumber').addEventListener('change', function(){
     var x = this.value;
     $(".player-input").hide();
     for (var i = 1; i <= x; i++) {
         document.getElementById("player"+i+"input").style.display = "block";
     }
-    setCookie("players", x);
+    window.localStorage.setItem("players", x);
 });
-
+/*
 var startBtn = document.getElementById('startGame');
 
 startBtn.onclick = function() {
-  window.localStorage.setItem('deck', JSON.stringify(tester));
+  //console.log(JSON.parse(window.localStorage.getItem('deck')));
+  var deckid = document.getElementById("deckname").value;
+  console.log(document.getElementById("deckname"));
+  console.log(deckid);
+  window.localStorage.setItem('deck', JSON.stringify(chosenDeck));
   for (var i = 1; i <= document.getElementById("playernumber").value ; i++) {
     var plName = document.getElementById("player"+i+"name").value;
     window.localStorage.setItem("player"+i+"name", plName);
     console.log("Player"+i+"name", window.localStorage.getItem("player"+i+"name"));
   }
-  //if (isMobile) {
-    window.open('game.html', '_blank');
-  //}
 
-	setPlayers(document.getElementById('playernumber').value);
-	//$.getScript("js/main.js");
-	//document.getElementById('setup').style.display = "none";
-	//document.getElementById('game').style.display = "block";
-}
+  $.ajax({
+    url: "loaddeck.php",
+    type: "get",
+    data: { 
+      'deckid': deckid
+    },
+    success: function(result) {
+      console.log("Success");
+
+      //window.open('game.html', '_blank');
+
+    },
+    error: function(error) {
+       alert('Exception:', error);
+    }
+  });
+
+    
+
+	//setPlayers(document.getElementById('playernumber').value);
+}*/
 
 
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-
+<?php session_start(); ?>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]>
 <!--><html class="no-js" lang="en"><!--<![endif]-->
@@ -9,24 +8,24 @@
 	<!-- Basic Page Needs
 	================================================== -->
 	<meta charset="utf-8">
-	<title>Talkped</title>
+	<title>Jeg Lurer På</title>
 	<meta name="description"  content="Spill for vanskelige tema" />
 	<meta name="author" content="IG Design">
-	<meta name="keywords"  content="TalkPed, Spill, Kristiansand Sykehus, Vanskelige tema" />
-	<meta property="og:title" content="TalkPed Template" />
-	<meta property="og:type" content="TalkPed" />
+	<meta name="keywords"  content="Jeg Lurer På, Spill, Kristiansand Sykehus, Vanskelige tema" />
+	<meta property="og:title" content="Jeg Lurer På Template" />
+	<meta property="og:type" content="Jeg Lurer På" />
 	<meta property="og:url" content="" />
 	<meta property="og:image" content="" />
 	<meta property="og:image:width" content="470" />
 	<meta property="og:image:height" content="246" />
 	<meta property="og:site_name" content="" />
-	<meta property="og:description" content="TalkPed - gjør det lettere for å snakke om vanskelige tema" />
+	<meta property="og:description" content="Jeg Lurer På - gjør det lettere for å snakke om vanskelige tema" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="#" />
 	<meta name="twitter:domain" content="#" />
 	<meta name="twitter:title" content="" />
-	<meta name="twitter:description" content="TalkPed - gjør det lettere for å snakke om vanskelige tema" />
-	<meta name="twitter:image" content="http://talkped.no" />
+	<meta name="twitter:description" content="Jeg Lurer På - gjør det lettere for å snakke om vanskelige tema" />
+	<meta name="twitter:image" content="http://jeglurerpå.no" />
 
 	<!-- Mobile Specific Metas
 	================================================== -->
@@ -122,15 +121,13 @@
 									<a class="nav-link no-line" href="#">Kontakt oss</a>
 								</li>
 								<li class="nav-item mt-2">
-									<a class="btn btn-primary js-tilt" href="register.html" role="button" data-tilt-perspective="300" data-tilt-speed="700" data-tilt-max="24"  id='logininfo'><span>
 									<?php 
-										if (!isset($_COOKIE['login']) || $_COOKIE['login'] == 0) {
-										echo "Logg inn / Registrer";
-									} elseif ($_COOKIE['login'] == 1) {
-										echo "Min side";
-									}
+									if(isset($_SESSION['uid'])) {
+											echo '<a class="btn btn-primary js-tilt" href="minside.php" role="button" data-tilt-perspective="300" data-tilt-speed="700" data-tilt-max="24"  id="logininfo"><span>Min Side</span></a>';
+										} else {
+											echo '<a class="btn btn-primary js-tilt" href="register.html" role="button" data-tilt-perspective="300" data-tilt-speed="700" data-tilt-max="24"  id="logininfo"><span>Logg inn / Registrer</span></a>';
+										}
 									?>
-										</span></a>
 								</li>
 							</ul>
 						</div>
@@ -150,7 +147,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 text-center text-lg-left parallax-fade-top align-self-center z-bigger">
-						<h2>TalkPed.</h2>
+						<h2>Jeg Lurer På.</h2>
 						<p class="mt-3 mb-4 pb-3 font-weight-normal">Gjør det lettere å snakke om vanskelige tema. Samtalegenerator/et verkyøt som skal gjøre det lettere å snakke om vanskelige tema.</p>
 						<a class="btn btn-primary ml-lg-0 js-tilt" href="#" role="button" data-tilt-perspective="300" data-tilt-speed="700" data-tilt-max="24"><span>Hvordan spiller man?</span></a>
 						<a class="btn btn-primary js-tilt" href="game.php" data-gal="m_PageScroll2id" data-ps2id-offset="68" role="button" data-tilt-perspective="300" data-tilt-speed="700" data-tilt-max="24"><span>Spill nå</span></a>
@@ -199,7 +196,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 footer text-center text-lg-left">
-						<p>Copyright © 2019, TalkPed by <a href="https://themeforest.net/user/ig_design/portfolio?ref=IG_design">Partner</a></p>
+						<p>Copyright © 2019, SSHF by <a href="https://themeforest.net/user/ig_design/portfolio?ref=IG_design">Partner</a></p>
 					</div>
 					<div class="col-lg-6 footer mt-4 mr-auto mt-lg-0 mr-lg-0 text-center text-lg-right">
 						<a class="app-btn mx-2 mr-lg-3" href="#"><i class="fa fa-twitter"></i></a>

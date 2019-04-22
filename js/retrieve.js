@@ -29,26 +29,6 @@ const iPadSafari =
     }
 
 
-	0: [1100 * scaleRate, 465* scaleRate],
-	1: [930* scaleRate, 465* scaleRate],
-	2: [750* scaleRate, 465* scaleRate],
-	3: [570* scaleRate, 465* scaleRate],
-	4: [390* scaleRate, 465* scaleRate],
-	5: [210* scaleRate, 465* scaleRate],
-	6: [30* scaleRate, 465* scaleRate],
-	7: [30* scaleRate, 295* scaleRate],
-	8: [30* scaleRate, 110* scaleRate],
-	9: [210* scaleRate, 110* scaleRate],
-	10: [390* scaleRate, 110* scaleRate],
-	11: [570* scaleRate, 110* scaleRate],
-	12: [750* scaleRate, 110* scaleRate],
-	13: [930* scaleRate, 110* scaleRate],
-	14: [1100* scaleRate, 110* scaleRate],
-	15: [1100* scaleRate, 295* scaleRate]
-
-
-
-
  preload: function() {
         game.load.image("closeButton", "images/closeButton.png");
         game.load.image("boxBack", "images/boxBack.png");

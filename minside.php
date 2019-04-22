@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start(); ?>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
@@ -11,21 +12,21 @@
 	<title>Jeg Lurer På</title>
 	<meta name="description" content="Spill for vanskelige tema" />
 	<meta name="author" content="IG Design">
-	<meta name="keywords" content="TalkPed, Spill, Kristiansand Sykehus, Vanskelige tema" />
-	<meta property="og:title" content="TalkPed Template" />
-	<meta property="og:type" content="TalkPed" />
+	<meta name="keywords" content="Jeg Lurer På, Spill, Kristiansand Sykehus, Vanskelige tema" />
+	<meta property="og:title" content="Jeg Lurer På Template" />
+	<meta property="og:type" content="Jeg Lurer På" />
 	<meta property="og:url" content="" />
 	<meta property="og:image" content="" />
 	<meta property="og:image:width" content="470" />
 	<meta property="og:image:height" content="246" />
 	<meta property="og:site_name" content="" />
-	<meta property="og:description" content="TalkPed - gjør det lettere for å snakke om vanskelige tema" />
+	<meta property="og:description" content="Jeg Lurer På - gjør det lettere for å snakke om vanskelige tema" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="#" />
 	<meta name="twitter:domain" content="#" />
 	<meta name="twitter:title" content="" />
-	<meta name="twitter:description" content="TalkPed - gjør det lettere for å snakke om vanskelige tema" />
-	<meta name="twitter:image" content="http://talkped.no" />
+	<meta name="twitter:description" content="Jeg Lurer På - gjør det lettere for å snakke om vanskelige tema" />
+	<meta name="twitter:image" content="http://jeglurerpå.no" />
 	<!-- Mobile Specific Metas
 	================================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -144,8 +145,9 @@
 		<div class="hero-center-wrap relative-on-lg">
 			<div class="container">
 					<?php 
-						include "createDeck.php";
+						//include "createDeck.php";
 					?>
+					
 				</div>
 			</div>
 		</div>
@@ -153,7 +155,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 footer text-center text-lg-left">
-					<p>Copyright © 2019, TalkPed by <a href="https://themeforest.net/user/ig_design/portfolio?ref=IG_design">Partner</a></p>
+					<p>Copyright © 2019, SSHF by <a href="https://themeforest.net/user/ig_design/portfolio?ref=IG_design">Partner</a></p>
 				</div>
 				<div class="col-lg-6 footer mt-4 mr-auto mt-lg-0 mr-lg-0 text-center text-lg-right">
 					<a class="app-btn mx-2 mr-lg-3" href="#"><i class="fa fa-twitter"></i></a>

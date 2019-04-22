@@ -1,6 +1,5 @@
-<head></head>
-
 <?php 
+
 include "../private/createDeck.php";
   $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 echo "<form action='registerDeck.php'>";
